@@ -24,9 +24,9 @@ func GetUserById(id int) (user User) {
 	return
 }
 
-func UpdateUserById(id int, userToUpdate User) (user User, err error) {
+func UpdateUserById(id int, userNameToUpdate string) (user User, err error) {
 	if user, ok := UsersDB[id]; ok {
-		user = userToUpdate
+		user.Name = userNameToUpdate
 		UsersDB[id] = user
 		return user, nil
 	}

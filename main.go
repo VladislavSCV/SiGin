@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -35,8 +36,8 @@ func main() {
 	api.GET("/users", GetUsers)
 	api.GET("/users/:id", GetUser)
 	api.POST("/addUser", AddUser)
-	// api.PUT("/users/:id", UpdateUser)
-	// api.DELETE("/users/:id", DeleteUser)
+	api.PUT("/users/:id/:name", UpdateUser)
+	api.DELETE("/users/:id", DeleteUser)
 
 	// api.GET("/autos", GetAutos)
 	// api.GET("/autos/:id", GetAuto)
@@ -77,27 +78,44 @@ func GetUsers(c *gin.Context) {
 	}
 }
 
+func GetUser(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		log.Print("Warning")
+	}
+	user := models.GetUserById(id)
+	if user.Id == 0 {
+		c.AbortWithStatus(http.StatusNotFound)
+		return
+	}
+	data := map[string]interface{}{
+		"id":       user.Id,
+		"name":     user.Name,
+		"email":    user.Email,
+		"password": user.Password,
+	}
+	c.AsciiJSON(http.StatusOK, data)
+}
+
 func AddUser(c *gin.Context) {
-	models.UsersDB[uint(len(models.UsersDB)+1)] = models.User{1, "name", "email", "passw"}
+	models.UsersDB[int(len(models.UsersDB)+1)] = models.User{int(len(models.UsersDB)+1), "name", "email", "passw"}
 	c.String(http.StatusOK, "OK")	
 }
 
-// ref: https://swaggo.github.io/swaggo.io/declarative_comments_format/api_operation.html
-// @Summary Show an account
-// @Description get string by ID
-// @Tags accounts
-// @Accept  json
-// @Produce  json
-// @Param id path string true "Account ID"
-// @Success 200 {object} model.Account
-// @Failure 400 {object} model.HTTPError
-// @Router /accounts/{id} [get]
-func GetUser(c *gin.Context) {
-	id := c.Param("id")
-	id = uint(id)
-	user := models.GetUserById(id)
-	data := map[string]interface{}{
-		
+func UpdateUser(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+	name := c.Param("name")
+	if err != nil {
+		log.Print("Error updating user")
 	}
-	c.AsciiJSON(http.StatusOK, data)
+	models.UpdateUserById(id, name)
+}
+
+func DeleteUser(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		log.Print("Warning")
+	}
+	models.DeleteUser(id)
+	c.JSON(http.StatusOK, "OK")
 }
