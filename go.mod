@@ -1,4 +1,4 @@
-module gin/modules
+module github.com/VladislavSCV/Site-Gin
 
 go 1.21.6
 
