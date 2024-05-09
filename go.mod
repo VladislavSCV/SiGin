@@ -1,4 +1,4 @@
-module github.com/VladislavSCV/Site-Gin
+module github.com/VladislavSCV/SiGin
 
 go 1.21.6
 
