@@ -7,7 +7,6 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	// "github.com/VladislavSCV/SiGin"
 	"github.com/VladislavSCV/SiGin/Models"
 )
 
@@ -62,15 +61,7 @@ func Ping(c *gin.Context) {
 	c.AsciiJSON(http.StatusOK, data)
 }
 
-// @Summary Api GetUsers
-// @Description get string by ID
-// @Tags accounts
-// @Accept  json
-// @Produce  json
-// @Param id path string true "Account ID"
-// @Success 200 {object} model.Account
-// @Failure 400 {object} model.HTTPError
-// @Router /accounts/{id} [get]
+
 func GetUsers(c *gin.Context) {
 	users := models.GetUsers()
 	for _, user := range users {
@@ -98,8 +89,15 @@ func GetUser(c *gin.Context) {
 }
 
 func AddUser(c *gin.Context) {
-	models.UsersDB[int(len(models.UsersDB)+1)] = models.User{int(len(models.UsersDB)+1), "name", "email", "passw"}
-	c.String(http.StatusOK, "OK")	
+	if models.UsersDB == nil {
+		log.Println("UsersDB is nil")
+		c.String(http.StatusInternalServerError, "Internal Server Error")
+		return
+	}
+	id := int(len(models.UsersDB) + 1)
+	user := models.User{id, "name", "email", "passw"}
+	models.UsersDB[id] = user
+	c.String(http.StatusOK, "OK")
 }
 
 func UpdateUser(c *gin.Context) {
