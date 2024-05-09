@@ -1,0 +1,13 @@
+version: '3.7'
+services:
+  app1: 
+    container_name: beego-container
+    image: "vladislav676/beego:v3"
+    ports:
+      - 8000:8080
+
+  app2: 
+    container_name: low4-container
+    image: "low4"
+    ports:
+      - 8001:8080

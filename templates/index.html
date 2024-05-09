@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Beautiful Page</title>
+    <style>
+        /* Clearfix hack */
+        :after, :before {
+            content: "";
+            display: table;
+        }
+
+        :after {
+            clear: both;
+        }
+
+        /* Generic styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.5rem;
+            position: relative;
+        }
+
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background-image: linear-gradient(to right, #4CAF50, #81C784);
+        }
+
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-text {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-links {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card-links a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .card-links a:hover {
+            text-decoration: underline;
+        }
+
+        .card-links a:first-child {
+            margin-right: 1rem;
+        }
+
+        .card-links a:last-child {
+            margin-left: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to My Beautiful Page</h1>
+        <h2>{{ .text }}</h2>
+    </header>
+    <main>
+        <h1>Hello, World!</h1>
+        <p>This is a simple and elegant HTML page. I hope you like it!</p>
+        <div class="card">
+            <h2 class="card-title">About Me</h2>
+            <p class="card-text">Find out more about me on my personal website.</p>
+            <div class="card-links">
+                <a href="https://www.example.com/about">Learn more</a>
+            </div>
+        </div>
+        <div class="card">
+            <h2 class="card-title">Portfolio</h2>
+            <p class="card-text">Check out my work on my portfolio website.</p>
+            <div class="card-links">
+                <a href="https://www.example.com/portfolio">View projects</a>
+            </div>
+        </div>
+        <div class="card">
+            <h2 class="card-title">Contact</h2>
+            <p class="card-text">Get in touch with me via email or social media.</p>
+            <div class="card-links">
+                <a href="https://www.example.com/contact">Contact me</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
+
