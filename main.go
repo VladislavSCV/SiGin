@@ -7,8 +7,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	// "github.com/VladislavSCV/Site-Gin"
+	"github.com/VladislavSCV/SiGin/Models"
 )
+
 
 
 func Logger() gin.HandlerFunc {
@@ -25,6 +26,8 @@ func Logger() gin.HandlerFunc {
 
 
 func main() {
+	user := models.User{1, "vlad", "", ""}
+	_ = user;
 	r := gin.Default()
 	r.LoadHTMLGlob("templates/*")
 

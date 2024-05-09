@@ -5,6 +5,7 @@ go 1.21.6
 require github.com/gin-gonic/gin v1.10.0
 
 require (
+	github.com/VladislavSCV/SiGin v0.0.0-20240509161256-54ca532b9468 // indirect
 	github.com/bytedance/sonic v1.11.6 // indirect
 	github.com/bytedance/sonic/loader v0.1.1 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20221115062448-fe3a3abad311 // indirect
