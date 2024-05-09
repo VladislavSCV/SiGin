@@ -32,9 +32,9 @@ func main() {
 
 	api.GET("/ping", Ping)
 	
-	// api.GET("/users", GetUsers)
-	// api.GET("/users/:id", GetUser)
-	// api.POST("/users", CreateUser)
+	api.GET("/users", GetUsers)
+	api.GET("/users/:id", GetUser)
+	api.POST("/addUser", AddUser)
 	// api.PUT("/users/:id", UpdateUser)
 	// api.DELETE("/users/:id", DeleteUser)
 
@@ -61,7 +61,6 @@ func Ping(c *gin.Context) {
 	c.AsciiJSON(http.StatusOK, data)
 }
 
-// ref: https://swaggo.github.io/swaggo.io/declarative_comments_format/api_operation.html
 // @Summary Api GetUsers
 // @Description get string by ID
 // @Tags accounts
@@ -71,6 +70,34 @@ func Ping(c *gin.Context) {
 // @Success 200 {object} model.Account
 // @Failure 400 {object} model.HTTPError
 // @Router /accounts/{id} [get]
-// func GetUsers(c *gin.Context) {
+func GetUsers(c *gin.Context) {
+	users := models.GetUsers()
+	for _, user := range users {
+		c.JSON(http.StatusOK, user)
+	}
+}
 
-// }
+func AddUser(c *gin.Context) {
+	models.UsersDB[uint(len(models.UsersDB)+1)] = models.User{1, "name", "email", "passw"}
+	c.String(http.StatusOK, "OK")	
+}
+
+// ref: https://swaggo.github.io/swaggo.io/declarative_comments_format/api_operation.html
+// @Summary Show an account
+// @Description get string by ID
+// @Tags accounts
+// @Accept  json
+// @Produce  json
+// @Param id path string true "Account ID"
+// @Success 200 {object} model.Account
+// @Failure 400 {object} model.HTTPError
+// @Router /accounts/{id} [get]
+func GetUser(c *gin.Context) {
+	id := c.Param("id")
+	id = uint(id)
+	user := models.GetUserById(id)
+	data := map[string]interface{}{
+		
+	}
+	c.AsciiJSON(http.StatusOK, data)
+}

@@ -3,13 +3,13 @@ package models
 import "fmt"
 
 type User struct {
-	Id       uint   `json:"id"`
+	Id       int   `json:"id"`
 	Name     string `json:"name"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
 
-var UsersDB = make(map[uint]User)
+var UsersDB = make(map[int]User)
 
 func GetUsers() (users []User) {
 	users = make([]User, 0, len(UsersDB))
@@ -19,12 +19,12 @@ func GetUsers() (users []User) {
 	return
 }
 
-func GetUserById(id uint) (user User) {
+func GetUserById(id int) (user User) {
 	user = UsersDB[id]
 	return
 }
 
-func UpdateUserById(id uint, userToUpdate User) (user User, err error) {
+func UpdateUserById(id int, userToUpdate User) (user User, err error) {
 	if user, ok := UsersDB[id]; ok {
 		user = userToUpdate
 		UsersDB[id] = user
@@ -34,11 +34,11 @@ func UpdateUserById(id uint, userToUpdate User) (user User, err error) {
 }
 
 func AddUser(user User) (status int) {
-	UsersDB[uint(len(UsersDB)+1)] = user
+	UsersDB[int(len(UsersDB)+1)] = user
 	return 1
 }
 
-func DeleteUser(id uint) (status int) {
+func DeleteUser(id int) (status int) {
 	if _, ok := UsersDB[id]; ok {
 		delete(UsersDB, id)
 		return 1
