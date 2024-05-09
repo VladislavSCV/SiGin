@@ -7,10 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	. "./Models"
 )
-
-var user = User{1, "vlad", "vlad@gmail.com", "password"}
 
 
 func Logger() gin.HandlerFunc {
