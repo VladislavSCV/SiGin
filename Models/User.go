@@ -6,3 +6,5 @@ type User struct {
 	Email string `json:"email"`
 	Password string `json:"password"`
 }
+
+var UsersDB = make(map[uint]User);

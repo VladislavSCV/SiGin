@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-
+	// "github.com/VladislavSCV/SiGin"
 	"github.com/VladislavSCV/SiGin/Models"
 )
 
@@ -15,11 +15,7 @@ import (
 func Logger() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		start := time.Now()
-
-		// Выполнение следующего middleware или обработчика маршрута
 		c.Next()
-
-		// Логирование времени выполнения запроса
 		log.Printf("[%s] %s %s %s", c.Request.Method, c.Request.URL.Path, c.Request.RemoteAddr, time.Since(start))
 	}
 }
@@ -67,3 +63,16 @@ func Ping(c *gin.Context) {
 	c.AsciiJSON(http.StatusOK, data)
 }
 
+// ref: https://swaggo.github.io/swaggo.io/declarative_comments_format/api_operation.html
+// @Summary Api GetUsers
+// @Description get string by ID
+// @Tags accounts
+// @Accept  json
+// @Produce  json
+// @Param id path string true "Account ID"
+// @Success 200 {object} model.Account
+// @Failure 400 {object} model.HTTPError
+// @Router /accounts/{id} [get]
+// func GetUsers(c *gin.Context) {
+
+// }
