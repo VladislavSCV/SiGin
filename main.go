@@ -22,8 +22,6 @@ func Logger() gin.HandlerFunc {
 
 
 func main() {
-	user := models.User{1, "vlad", "", ""}
-	_ = user;
 	r := gin.Default()
 	r.LoadHTMLGlob("templates/*")
 
